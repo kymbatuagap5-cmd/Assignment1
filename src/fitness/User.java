@@ -5,14 +5,12 @@ public class User {
     private int age;
     private float weight;
 
-    // Constructor
     public User(String name, int age, float weight) {
         this.name = name;
         this.age = age;
         this.weight = weight;
     }
 
-    // Getters and Setters
     public String getName() {
         return name;
     }
@@ -37,7 +35,6 @@ public class User {
         this.weight = weight;
     }
 
-    // toString method
     @Override
     public String toString() {
         return "User{name='" + name + "', age=" + age + ", weight=" + weight + "}";
