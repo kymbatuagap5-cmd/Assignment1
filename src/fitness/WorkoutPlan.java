@@ -1,8 +1,11 @@
 package fitness;
 
+import java.util.Objects;
+
 public class WorkoutPlan {
+
     private String workoutName;
-    private int duration; // minutes
+    private int duration;
 
     public WorkoutPlan(String workoutName, int duration) {
         this.workoutName = workoutName;
@@ -27,6 +30,25 @@ public class WorkoutPlan {
 
     @Override
     public String toString() {
-        return "WorkoutPlan{workoutName='" + workoutName + "', duration=" + duration + " minutes}";
+        return "WorkoutPlan{" +
+                "workoutName='" + workoutName + '\'' +
+                ", duration=" + duration +
+                " minutes}";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof WorkoutPlan)) return false;
+        WorkoutPlan that = (WorkoutPlan) o;
+        return duration == that.duration &&
+                Objects.equals(workoutName, that.workoutName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(workoutName, duration);
     }
 }
+
+

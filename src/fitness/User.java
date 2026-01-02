@@ -1,42 +1,65 @@
 package fitness;
 
-public class User {
-    private String name;
-    private int age;
-    private float weight;
+import java.util.ArrayList;
+import java.util.Objects;
 
-    public User(String name, int age, float weight) {
-        this.name = name;
-        this.age = age;
+public class User extends Person {
+
+    private double weight;
+    private ArrayList<WorkoutPlan> workouts;
+
+    public User(String name, int age, double weight) {
+        super(name, age);
         this.weight = weight;
+        this.workouts = new ArrayList<>();
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public float getWeight() {
+    public double getWeight() {
         return weight;
     }
 
-    public void setWeight(float weight) {
+    public void setWeight(double weight) {
         this.weight = weight;
+    }
+
+    // add workout to this user
+    public void addWorkout(WorkoutPlan workout) {
+        workouts.add(workout);
+    }
+
+    public ArrayList<WorkoutPlan> getWorkouts() {
+        return workouts;
+    }
+
+    @Override
+    public String getInfo() {
+        return toString();
     }
 
     @Override
     public String toString() {
-        return "User{name='" + name + "', age=" + age + ", weight=" + weight + "}";
+        return "User{" +
+                "name='" + getName() + '\'' +
+                ", age=" + getAge() +
+                ", weight=" + weight +
+                ", workouts=" + workouts +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        User user = (User) o;
+        return getAge() == user.getAge() &&
+                Double.compare(user.weight, weight) == 0 &&
+                Objects.equals(getName(), user.getName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getName(), getAge(), weight);
     }
 }
+
+

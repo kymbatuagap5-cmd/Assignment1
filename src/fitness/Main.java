@@ -1,21 +1,61 @@
 package fitness;
 
+import java.util.Scanner;
+
 public class Main {
+
     public static void main(String[] args) {
 
-        User user1 = new User("Aruzhan", 20, 55.5f);
-        User user2 = new User("Dias", 22, 70.0f);
+        Scanner scanner = new Scanner(System.in);
+        FitnessApp app = new FitnessApp();
 
-        WorkoutPlan plan1 = new WorkoutPlan("Cardio", 30);
-        WorkoutPlan plan2 = new WorkoutPlan("Strength", 45);
+        System.out.print("How many users do you want to add? ");
+        int userCount = scanner.nextInt();
+        scanner.nextLine(); // clear buffer
 
-        FitnessApp app1 = new FitnessApp("MyFitnessApp", user1, plan1);
-        FitnessApp app2 = new FitnessApp("MyFitnessApp", user2, plan2);
+        for (int i = 0; i < userCount; i++) {
 
-        app1.showInfo();
-        System.out.println("-----------------");
-        app2.showInfo();
+            System.out.println("\nEnter user " + (i + 1) + " info:");
 
-        System.out.println("Are users the same? " + user1.equals(user2));
+            System.out.print("Name: ");
+            String name = scanner.nextLine();
+
+            System.out.print("Age: ");
+            int age = scanner.nextInt();
+
+            System.out.print("Weight: ");
+            double weight = scanner.nextDouble();
+            scanner.nextLine(); // clear buffer
+
+            User user = new User(name, age, weight);
+
+            // workouts for this user
+            System.out.print("How many workouts for this user? ");
+            int workoutCount = scanner.nextInt();
+            scanner.nextLine();
+
+            for (int j = 0; j < workoutCount; j++) {
+                System.out.print("Workout name: ");
+                String wName = scanner.nextLine();
+
+                System.out.print("Duration (minutes): ");
+                int duration = scanner.nextInt();
+                scanner.nextLine();
+
+                user.addWorkout(new WorkoutPlan(wName, duration));
+            }
+
+            app.addUser(user);
+        }
+
+        // OUTPUT
+        System.out.println("\n--- ALL USERS WITH WORKOUTS ---");
+        for (User u : app.getUsers()) {
+            System.out.println(u);
+        }
+
+        scanner.close();
     }
 }
+
+

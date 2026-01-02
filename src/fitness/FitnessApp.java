@@ -1,43 +1,55 @@
 package fitness;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
 public class FitnessApp {
-    private String appName;
-    private User user;
-    private WorkoutPlan workoutPlan;
 
-    public FitnessApp(String appName, User user, WorkoutPlan workoutPlan) {
-        this.appName = appName;
-        this.user = user;
-        this.workoutPlan = workoutPlan;
+    private ArrayList<User> users;
+    private ArrayList<WorkoutPlan> workoutPlans;
+
+    public FitnessApp() {
+        users = new ArrayList<>();
+        workoutPlans = new ArrayList<>();
     }
 
-    public String getAppName() {
-        return appName;
+    public void addUser(User user) {
+        users.add(user);
     }
 
-    public void setAppName(String appName) {
-        this.appName = appName;
+    public void addWorkoutPlan(WorkoutPlan workoutPlan) {
+        workoutPlans.add(workoutPlan);
     }
 
-    public User getUser() {
-        return user;
+    public User findUserByName(String name) {
+        for (User user : users) {
+            if (user.getName().equalsIgnoreCase(name)) {
+                return user;
+            }
+        }
+        return null;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public ArrayList<User> filterUsersByAge(int minAge) {
+        ArrayList<User> result = new ArrayList<>();
+        for (User user : users) {
+            if (user.getAge() > minAge) {
+                result.add(user);
+            }
+        }
+        return result;
     }
 
-    public WorkoutPlan getWorkoutPlan() {
-        return workoutPlan;
+    public void sortUsersByAge() {
+        Collections.sort(users, Comparator.comparingInt(User::getAge));
     }
 
-    public void setWorkoutPlan(WorkoutPlan workoutPlan) {
-        this.workoutPlan = workoutPlan;
+    public ArrayList<User> getUsers() {
+        return users;
     }
 
-    public void showInfo() {
-        System.out.println("App: " + appName);
-        System.out.println(user);
-        System.out.println(workoutPlan);
+    public ArrayList<WorkoutPlan> getWorkoutPlans() {
+        return workoutPlans;
     }
 }
