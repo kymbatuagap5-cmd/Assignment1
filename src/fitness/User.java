@@ -22,7 +22,6 @@ public class User extends Person {
         this.weight = weight;
     }
 
-    // add workout to this user
     public void addWorkout(WorkoutPlan workout) {
         workouts.add(workout);
     }
